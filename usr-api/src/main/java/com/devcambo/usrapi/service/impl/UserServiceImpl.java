@@ -1,0 +1,60 @@
+package com.devcambo.usrapi.service.impl;
+
+import com.devcambo.usrapi.dto.user.UserDto;
+import com.devcambo.usrapi.dto.user.UserRequestDto;
+import com.devcambo.usrapi.entity.User;
+import com.devcambo.usrapi.exception.ResourceNotFoundExp;
+import com.devcambo.usrapi.mapper.UserMapper;
+import com.devcambo.usrapi.repository.UserRepository;
+import com.devcambo.usrapi.service.UserService;
+import java.util.List;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+@Service
+@RequiredArgsConstructor
+public class UserServiceImpl implements UserService {
+
+  private final UserRepository userRepository;
+
+  @Override
+  public List<UserDto> findAllUsers() {
+    List<User> users = userRepository.findAll();
+    return users.stream().map(UserMapper::toUserDto).toList();
+  }
+
+  @Override
+  public UserDto findUserById(Integer id) {
+    User user = getUserById(id);
+    return UserMapper.toUserDto(user);
+  }
+
+  @Override
+  public UserDto createUser(UserRequestDto userRequestDto) {
+    User user = UserMapper.toUser(userRequestDto);
+    return UserMapper.toUserDto(userRepository.save(user));
+  }
+
+  @Override
+  public UserDto updateUser(Integer id, UserRequestDto userRequestDto) {
+    User existingUser = getUserById(id);
+    existingUser.setUsername(userRequestDto.username());
+    existingUser.setEmail(userRequestDto.email());
+    existingUser.setPassword(userRequestDto.password());
+    existingUser.setBio(userRequestDto.bio());
+    existingUser.setProfilePicture(userRequestDto.profilePicture());
+    return UserMapper.toUserDto(userRepository.save(existingUser));
+  }
+
+  @Override
+  public void deleteUser(Integer id) {
+    User user = getUserById(id);
+    userRepository.deleteById(user.getUserId());
+  }
+
+  public User getUserById(Integer id) {
+    return userRepository
+      .findById(id)
+      .orElseThrow(() -> new ResourceNotFoundExp("User", "id", id.toString()));
+  }
+}
