@@ -13,6 +13,7 @@ import RegisterPage from './pages/RegisterPage';
 import UserProfilePage from './pages/UserProfilePage';
 import { PostProvider } from './context/post/PostContext';
 import { CommentProvider } from './context/comment/CommentContext';
+import DashboardPage from './pages/DashboardPage';
 
 const App = () => {
   return (
@@ -22,12 +23,17 @@ const App = () => {
           <MainNavbar />
           <Container className='mt-4'>
             <Routes>
+              {/* Public routes */}
               <Route path='/' element={<Homepage />} />
               <Route path='/about' element={<AboutPage />} />
               <Route path='/login' element={<LoginPage />} />
               <Route path='/register' element={<RegisterPage />} />
               <Route path='/posts/:postId' element={<PostDetailPage />} />
               <Route path='/profile/:username' element={<UserProfilePage />} />
+
+              {/* Private routes */}
+              <Route path='/dashboard' element={<DashboardPage />} />
+
               {/* Catch-all route for 404 Not Found */}
               <Route path='*' element={<NotFoundPage />} />
             </Routes>
