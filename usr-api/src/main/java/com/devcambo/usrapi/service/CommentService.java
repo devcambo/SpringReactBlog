@@ -5,7 +5,7 @@ import com.devcambo.usrapi.dto.comment.CommentRequestDto;
 import java.util.List;
 
 public interface CommentService {
-  List<CommentDto> findAllComments();
+  List<CommentDto> findAllComments(Integer postId);
   CommentDto findCommentById(Integer id);
   CommentDto createComment(CommentRequestDto commentRequestDto);
   CommentDto updateComment(Integer id, CommentRequestDto commentRequestDto);

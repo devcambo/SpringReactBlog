@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 function MainNavbar() {
   return (
-    <Navbar expand='lg' className='bg-body-tertiary'>
+    <Navbar expand='lg' className='bg-body-tertiary' sticky="top">
       <Container fluid>
         <Navbar.Brand as={Link} to={'/'}>
           Blog Post

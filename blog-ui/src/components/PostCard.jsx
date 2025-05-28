@@ -6,7 +6,7 @@ function PostCard({ post }) {
     <Card style={{ width: '18rem' }}>
       <Card.Img
         variant='top'
-        src='https://pppkhmer.sgp1.digitaloceanspaces.com/image/main/20255/26_5_2025_a1513.jpg'
+        src={'https://pppkhmer.sgp1.digitaloceanspaces.com/image/main/20255/26_5_2025_a1513.jpg'}
       />
       <Card.Body>
         <Card.Title className='koh-santepheap-regular'>{post.title}</Card.Title>

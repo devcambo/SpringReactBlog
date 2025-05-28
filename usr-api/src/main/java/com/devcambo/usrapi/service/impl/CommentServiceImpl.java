@@ -25,8 +25,10 @@ public class CommentServiceImpl implements CommentService {
   private final InteractionRepository interactionRepository;
 
   @Override
-  public List<CommentDto> findAllComments() {
-    List<Comment> comments = commentRepository.findAll();
+  public List<CommentDto> findAllComments(Integer postId) {
+    Post post = postRepository.findById(postId)
+            .orElseThrow(() -> new ResourceNotFoundExp("Post", "id", postId.toString()));
+    List<Comment> comments = commentRepository.findAllByPost(post);
     return comments.stream().map(CommentMapper::toCommentDto).toList();
   }
 

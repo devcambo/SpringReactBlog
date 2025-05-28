@@ -1,14 +1,9 @@
-import axios from 'axios';
-
-const api = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL,
-  timeout: 10000, // 10 seconds timeout
-});
+import apiClient from '../../api/apiClient';
 
 // findAllPosts
 export const findAllPosts = async () => {
   try {
-    const response = await api.get('/posts');
+    const response = await apiClient.get('/posts');
     return response.data;
   } catch (error) {
     console.error('Error fetching posts:', error);
@@ -19,7 +14,7 @@ export const findAllPosts = async () => {
 // findPostById
 export const findPostById = async (id) => {
   try {
-    const response = await api.get(`/posts/${id}`);
+    const response = await apiClient.get(`/posts/${id}`);
     return response.data;
   } catch (error) {
     console.error(`Error fetching post with id ${id}:`, error);
@@ -30,7 +25,7 @@ export const findPostById = async (id) => {
 // createPost
 export const createPost = async (postData) => {
   try {
-    const response = await api.post('/posts', postData);
+    const response = await apiClient.post('/posts', postData);
     return response.data;
   } catch (error) {
     console.error('Error creating post:', error);
@@ -41,7 +36,7 @@ export const createPost = async (postData) => {
 // updatePost
 export const updatePost = async (id, postData) => {
   try {
-    const response = await api.put(`/posts/${id}`, postData);
+    const response = await apiClient.put(`/posts/${id}`, postData);
     return response.data;
   } catch (error) {
     console.error(`Error updating post with id ${id}:`, error);
@@ -52,7 +47,7 @@ export const updatePost = async (id, postData) => {
 // deletePost
 export const deletePost = async (id) => {
   try {
-    const response = await api.delete(`/posts/${id}`);
+    const response = await apiClient.delete(`/posts/${id}`);
     return response.data;
   } catch (error) {
     console.error(`Error deleting post with id ${id}:`, error);

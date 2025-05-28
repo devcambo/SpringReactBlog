@@ -21,9 +21,9 @@ public class CommentController {
 
   // TODO: implement pagination and sorting
   @GetMapping
-  public ResponseEntity<List<CommentDto>> findAll() {
-    log.info("Fetching all comments");
-    return ResponseEntity.ok(commentService.findAllComments());
+  public ResponseEntity<List<CommentDto>> findAll(@RequestParam(required = false) Integer postId) {
+    log.info("Fetching all comments with postId: {}", postId);
+    return ResponseEntity.ok(commentService.findAllComments(postId));
   }
 
   @GetMapping("/{id}")

@@ -11,27 +11,30 @@ import LoginPage from './pages/LoginPage';
 import PostDetailPage from './pages/PostDetailPage';
 import RegisterPage from './pages/RegisterPage';
 import UserProfilePage from './pages/UserProfilePage';
-import { PostProvider } from './context/PostContext';
+import { PostProvider } from './context/post/PostContext';
+import { CommentProvider } from './context/comment/CommentContext';
 
 const App = () => {
   return (
     <PostProvider>
-      <Router>
-        <MainNavbar />
-        <Container className='mt-4'>
-          <Routes>
-            <Route path='/' element={<Homepage />} />
-            <Route path='/about' element={<AboutPage />} />
-            <Route path='/login' element={<LoginPage />} />
-            <Route path='/register' element={<RegisterPage />} />
-            <Route path='/posts/:postId' element={<PostDetailPage />} />
-            <Route path='/profile/:username' element={<UserProfilePage />} />
-            {/* Catch-all route for 404 Not Found */}
-            <Route path='*' element={<NotFoundPage />} />
-          </Routes>
-        </Container>
-        <ToastContainer />
-      </Router>
+      <CommentProvider>
+        <Router>
+          <MainNavbar />
+          <Container className='mt-4'>
+            <Routes>
+              <Route path='/' element={<Homepage />} />
+              <Route path='/about' element={<AboutPage />} />
+              <Route path='/login' element={<LoginPage />} />
+              <Route path='/register' element={<RegisterPage />} />
+              <Route path='/posts/:postId' element={<PostDetailPage />} />
+              <Route path='/profile/:username' element={<UserProfilePage />} />
+              {/* Catch-all route for 404 Not Found */}
+              <Route path='*' element={<NotFoundPage />} />
+            </Routes>
+          </Container>
+          <ToastContainer />
+        </Router>
+      </CommentProvider>
     </PostProvider>
   );
 };
