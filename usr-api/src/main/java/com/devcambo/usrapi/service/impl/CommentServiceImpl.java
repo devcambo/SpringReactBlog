@@ -26,8 +26,9 @@ public class CommentServiceImpl implements CommentService {
 
   @Override
   public List<CommentDto> findAllComments(Integer postId) {
-    Post post = postRepository.findById(postId)
-            .orElseThrow(() -> new ResourceNotFoundExp("Post", "id", postId.toString()));
+    Post post = postRepository
+      .findById(postId)
+      .orElseThrow(() -> new ResourceNotFoundExp("Post", "id", postId.toString()));
     List<Comment> comments = commentRepository.findAllByPost(post);
     return comments.stream().map(CommentMapper::toCommentDto).toList();
   }

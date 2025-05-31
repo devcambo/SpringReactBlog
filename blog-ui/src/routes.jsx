@@ -9,6 +9,8 @@ import RegisterPage from './pages/RegisterPage';
 import UserProfilePage from './pages/UserProfilePage';
 import DashboardPage from './pages/DashboardPage';
 import DashBoardLayout from './layouts/DashBoardLayout';
+import ProtectedRoute from './components/ProtectedRoute';
+import ManageUserPage from './pages/ManageUserPage';
 
 const AppRoutes = () => {
   return (
@@ -27,8 +29,11 @@ const AppRoutes = () => {
         </Route>
 
         {/* Dashboard Layout */}
-        <Route path='/dashboard' element={<DashBoardLayout />}>
-          <Route index element={<DashboardPage />} />
+        <Route element={<ProtectedRoute />}>
+          <Route path='/dashboard' element={<DashBoardLayout />}>
+            <Route path='/dashboard' element={<DashboardPage />} />
+            <Route path='/dashboard/users' element={<ManageUserPage />} />
+          </Route>
         </Route>
       </Routes>
     </Router>

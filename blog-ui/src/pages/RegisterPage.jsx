@@ -1,17 +1,40 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Col } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import AuthContext from '../context/auth/AuthContext';
+import { registerUser } from '../context/auth/AuthAction';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 const RegisterPage = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const { dispatch } = useContext(AuthContext);
+
+  const navigate = useNavigate();
+
+  const register = async (userData) => {
+    try {
+      const { access_token } = await registerUser(userData);
+      dispatch({ type: 'REGISTER', payload: access_token });
+      toast.success('Registration successful!');
+      navigate('/dashboard');
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    // TODO: Call register API
-    console.log(username, email, password);
+    const userData = {
+      username,
+      email,
+      password,
+    };
+    register(userData);
     clearForm();
   };
 

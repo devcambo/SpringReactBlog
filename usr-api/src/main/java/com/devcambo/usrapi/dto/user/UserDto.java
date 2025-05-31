@@ -9,5 +9,6 @@ public record UserDto(
   String email,
   String bio,
   String profilePicture,
+  String roles,
   @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss a") LocalDateTime createdAt
 ) {}

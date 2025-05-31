@@ -8,7 +8,7 @@ const SideBar = () => {
       className='flex-column p-4 h-100'
       style={{ width: '250px' }}
     >
-      <Navbar.Brand className='mb-3 font-bold text-lg'>Menu</Navbar.Brand>
+      {/* <Navbar.Brand className='mb-3 font-bold text-lg'>Menu</Navbar.Brand> */}
       <Nav className='flex-column w-100'>
         <Nav.Link
           href='#post'

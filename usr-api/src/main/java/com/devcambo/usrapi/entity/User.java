@@ -34,6 +34,9 @@ public class User extends BaseEntity {
   @Column(length = 100)
   private String profilePicture;
 
+  @Column(length = 100)
+  private String roles;
+
   // One-to-many relationship with Comment
   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
   private List<Comment> comments;
