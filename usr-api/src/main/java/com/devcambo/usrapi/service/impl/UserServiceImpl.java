@@ -9,6 +9,7 @@ import com.devcambo.usrapi.repository.UserRepository;
 import com.devcambo.usrapi.service.UserService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService {
 
   private final UserRepository userRepository;
+  private final PasswordEncoder encoder;
 
   @Override
   public List<UserDto> findAllUsers() {
@@ -32,6 +34,8 @@ public class UserServiceImpl implements UserService {
   @Override
   public UserDto createUser(UserRequestDto userRequestDto) {
     User user = UserMapper.toUser(userRequestDto);
+    user.setPassword(encoder.encode(user.getPassword()));
+    user.setRoles("admin,user");
     return UserMapper.toUserDto(userRepository.save(user));
   }
 

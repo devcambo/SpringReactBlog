@@ -10,6 +10,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -68,4 +70,16 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     errorResponse.setErrorTime(LocalDateTime.now());
     return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
   }
+
+  @ExceptionHandler({UsernameNotFoundException.class, BadCredentialsException.class})
+  public ResponseEntity<ErrorResponseDto> handleAuthenticationException(Exception ex, WebRequest webRequest) {
+    log.error("Authentication error: {}", ex.getMessage());
+    ErrorResponseDto errorResponse = new ErrorResponseDto();
+    errorResponse.setApiPath(webRequest.getDescription(false));
+    errorResponse.setErrorCode(HttpStatus.UNAUTHORIZED);
+    errorResponse.setErrorMessage(ex.getMessage());
+    errorResponse.setErrorTime(LocalDateTime.now());
+    return new ResponseEntity<>(errorResponse, HttpStatus.UNAUTHORIZED);
+  }
+
 }

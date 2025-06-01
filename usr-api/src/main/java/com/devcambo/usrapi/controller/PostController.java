@@ -3,6 +3,9 @@ package com.devcambo.usrapi.controller;
 import com.devcambo.usrapi.dto.post.PostDto;
 import com.devcambo.usrapi.dto.post.PostRequestDto;
 import com.devcambo.usrapi.service.PostService;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -21,8 +24,19 @@ public class PostController {
 
   // TODO: implement pagination and sorting
   @GetMapping
-  public ResponseEntity<List<PostDto>> findAll() {
+  public ResponseEntity<List<PostDto>> findAll(HttpServletRequest request) {
     log.info("Fetching all posts");
+    // Print cookie value
+    Cookie[] cookies = request.getCookies();
+    HttpSession session = request.getSession();
+    if (cookies != null) {
+      for (Cookie cookie : cookies) {
+        log.info("Cookie name: {}, value: {}", cookie.getName(), cookie.getValue());
+      }
+    }
+    if (session != null) {
+      log.info("Session id: {}", session.getId());
+    }
     return ResponseEntity.ok(postService.findAllPosts());
   }
 

@@ -6,16 +6,19 @@ import { PostProvider } from './context/post/PostContext';
 import { CommentProvider } from './context/comment/CommentContext';
 import AppRoutes from './routes';
 import { AuthProvider } from './context/auth/AuthContext';
+import { UserProvider } from './context/user/UserContext';
 
 const App = () => {
   return (
     <AuthProvider>
-      <PostProvider>
-        <CommentProvider>
-          <AppRoutes />
-          <ToastContainer />
-        </CommentProvider>
-      </PostProvider>
+      <UserProvider>
+        <PostProvider>
+          <CommentProvider>
+            <AppRoutes />
+            <ToastContainer />
+          </CommentProvider>
+        </PostProvider>
+      </UserProvider>
     </AuthProvider>
   );
 };
