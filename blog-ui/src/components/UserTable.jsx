@@ -26,51 +26,53 @@ const UserTable = () => {
   }, []);
 
   return (
-    <Table responsive='sm'>
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Username</th>
-          <th>Email</th>
-          <th>Biography</th>
-          <th>Profile Picture</th>
-          <th>Roles</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        {users &&
-          users.map((user) => (
-            <tr key={user.userId}>
-              <td>{user.userId}</td>
-              <td>{user.username}</td>
-              <td>{user.email}</td>
-              <td>{user.biography}</td>
-              <td>{user.profilePicture}</td>
-              <td>{user.roles}</td>
-              <td>
-                <button
-                  className='btn-sm btn btn-primary'
-                  onClick={() => {
-                    setShowModal(true);
-                    setselecteduser(user.userId);
-                  }}
-                >
-                  Edit
-                </button>
-                <button
-                  className='btn-sm btn btn-danger ms-2'
-                  onClick={() => {
-                    setShowDeleteModal(true);
-                    setselecteduser(user.userId);
-                  }}
-                >
-                  Delete
-                </button>
-              </td>
-            </tr>
-          ))}
-      </tbody>
+    <>
+      <Table responsive='sm'>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Biography</th>
+            <th>Profile Picture</th>
+            <th>Roles</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {users &&
+            users.map((user) => (
+              <tr key={user.userId}>
+                <td>{user.userId}</td>
+                <td>{user.username}</td>
+                <td>{user.email}</td>
+                <td>{user.biography}</td>
+                <td>{user.profilePicture}</td>
+                <td>{user.roles}</td>
+                <td>
+                  <button
+                    className='btn-sm btn btn-primary'
+                    onClick={() => {
+                      setShowModal(true);
+                      setselecteduser(user.userId);
+                    }}
+                  >
+                    Edit
+                  </button>
+                  <button
+                    className='btn-sm btn btn-danger ms-2'
+                    onClick={() => {
+                      setShowDeleteModal(true);
+                      setselecteduser(user.userId);
+                    }}
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))}
+        </tbody>
+      </Table>
       <EditUserForm
         show={showModal}
         onHide={() => setShowModal(false)}
@@ -81,7 +83,7 @@ const UserTable = () => {
         onHide={() => setShowDeleteModal(false)}
         userid={selecteduser}
       />
-    </Table>
+    </>
   );
 };
 

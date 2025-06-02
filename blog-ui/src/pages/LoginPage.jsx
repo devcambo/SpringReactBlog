@@ -13,7 +13,7 @@ const LoginPage = () => {
 
   const { dispatch } = useContext(AuthContext);
 
-  const from = sessionStorage.getItem("redirectPath") || "/dashboard";
+  const from = sessionStorage.getItem("redirectPath") || "/dashboard/users";
 
   const navigate = useNavigate();
 
