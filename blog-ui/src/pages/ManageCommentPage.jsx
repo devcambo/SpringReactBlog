@@ -1,9 +1,14 @@
-import React from 'react'
+import React from 'react';
+import { Row } from 'react-bootstrap';
+import CommentTable from '../components/CommentTable';
 
 const ManageCommentPage = () => {
   return (
-    <div>ManageCommentPage</div>
-  )
-}
+    <Row>
+      <h1>All Comments</h1>
+      <CommentTable />
+    </Row>
+  );
+};
 
-export default ManageCommentPage
+export default ManageCommentPage;

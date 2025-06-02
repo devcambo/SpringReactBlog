@@ -71,8 +71,11 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
   }
 
-  @ExceptionHandler({UsernameNotFoundException.class, BadCredentialsException.class})
-  public ResponseEntity<ErrorResponseDto> handleAuthenticationException(Exception ex, WebRequest webRequest) {
+  @ExceptionHandler({ UsernameNotFoundException.class, BadCredentialsException.class })
+  public ResponseEntity<ErrorResponseDto> handleAuthenticationException(
+    Exception ex,
+    WebRequest webRequest
+  ) {
     log.error("Authentication error: {}", ex.getMessage());
     ErrorResponseDto errorResponse = new ErrorResponseDto();
     errorResponse.setApiPath(webRequest.getDescription(false));
@@ -81,5 +84,4 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     errorResponse.setErrorTime(LocalDateTime.now());
     return new ResponseEntity<>(errorResponse, HttpStatus.UNAUTHORIZED);
   }
-
 }

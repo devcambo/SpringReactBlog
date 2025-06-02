@@ -10,4 +10,5 @@ public interface UserService {
   UserDto createUser(UserRequestDto userRequestDto);
   UserDto updateUser(Integer id, UserRequestDto userRequestDto);
   void deleteUser(Integer id);
+  UserDto findByEmail(String name);
 }

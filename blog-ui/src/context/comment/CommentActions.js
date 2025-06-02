@@ -3,8 +3,13 @@ import apiClient from '../../api/apiClient';
 // findAllComments -> /comments?postId={postId}
 export const findAllComments = async (postId) => {
   try {
-    const response = await apiClient.get(`/comments?postId=${postId}`);
-    return response.data;
+    if (postId) {
+      const response = await apiClient.get(`/comments?postId=${postId}`);
+      return response.data;
+    } else {
+      const response = await apiClient.get('/comments');
+      return response.data;
+    }
   } catch (error) {
     console.error('Error fetching comments:', error);
     throw error;

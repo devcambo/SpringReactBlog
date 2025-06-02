@@ -54,3 +54,14 @@ export const deleteUser = async (id) => {
     throw error;
   }
 };
+
+// getUserProfile
+export const getUserProfile = async () => {
+  try {
+    const response = await apiClient.get('/users/profile');
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching user profile:', error);
+    throw error;
+  }
+};

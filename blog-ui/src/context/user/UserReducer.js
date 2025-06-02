@@ -29,6 +29,11 @@ const userReducer = (state, action) => {
         ...state,
         users: state.users.filter((user) => user.userId !== action.payload),
       };
+    case 'FIND_USER_PROFILE':
+      return {
+        ...state,
+        user: action.payload,
+      };
     default:
       return state;
   }

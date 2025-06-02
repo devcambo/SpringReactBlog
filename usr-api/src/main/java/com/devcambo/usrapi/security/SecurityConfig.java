@@ -1,5 +1,6 @@
 package com.devcambo.usrapi.security;
 
+import java.util.List;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -19,8 +20,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-
-import java.util.List;
 
 @Configuration
 public class SecurityConfig {
@@ -63,9 +62,9 @@ public class SecurityConfig {
       sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
     );
     http.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
-//    http.exceptionHandling(exp -> exp.authenticationEntryPoint(new CustomBasicAuthenticationEntryPoint()));
-//    http.httpBasic(hbc -> hbc.authenticationEntryPoint(new CustomBasicAuthenticationEntryPoint()));
-//    http.exceptionHandling(ehc -> ehc.accessDeniedHandler(new CustomAccessDeniedHandler()));
+    //    http.exceptionHandling(exp -> exp.authenticationEntryPoint(new CustomBasicAuthenticationEntryPoint()));
+    //    http.httpBasic(hbc -> hbc.authenticationEntryPoint(new CustomBasicAuthenticationEntryPoint()));
+    //    http.exceptionHandling(ehc -> ehc.accessDeniedHandler(new CustomAccessDeniedHandler()));
     return http.build();
   }
 
@@ -87,5 +86,4 @@ public class SecurityConfig {
   public PasswordEncoder passwordEncoder() {
     return PasswordEncoderFactories.createDelegatingPasswordEncoder();
   }
-
 }
